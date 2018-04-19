@@ -22,7 +22,7 @@ import static org.junit.Assert.*;
 public class ModelRepositoryImplTest {
 
     @Autowired
-    ModelRepository modelRepository;
+    private ModelRepository modelRepository;
 
     @Rollback
     @Test

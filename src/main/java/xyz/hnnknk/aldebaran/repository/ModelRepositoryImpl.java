@@ -10,22 +10,28 @@ import xyz.hnnknk.aldebaran.model.Model;
 
 import java.util.List;
 
+/**
+ * The Model repository.
+ */
 @Transactional
 @Repository
-public class ModelRepositoryImpl implements ModelRepository{
+public class ModelRepositoryImpl implements ModelRepository {
 
+    /**
+     * The Jdbc template.
+     */
     @Autowired
-    JdbcTemplate jdbcTemplate;
+    private JdbcTemplate jdbcTemplate;
 
     @Override
-    public List<Model> findAll() {
+    public final List<Model> findAll() {
         String sql = "SELECT MODEL_ID, MODEL_NAME FROM MODEL";
         RowMapper<Model> rowMapper = new ModelMapper();
         return this.jdbcTemplate.query(sql, rowMapper);
     }
 
     @Override
-    public void add(Model model) {
+    public final void add(final Model model) {
         String sql = "INSERT INTO MODEL (MODEL_NAME) values (?)";
         jdbcTemplate.update(sql, model.getName());
     }

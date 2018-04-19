@@ -54,7 +54,8 @@ public class MainControllerIntegrationTest {
 
         String d = new ObjectMapper().writeValueAsString(model);
 
-        mvc.perform(post("/model/").content(d).contentType(MediaType.APPLICATION_JSON_VALUE))
+        mvc.perform(post("/model/").content(d)
+                .contentType(MediaType.APPLICATION_JSON_VALUE))
                 .andExpect(status().isCreated());
 
         assertEquals("hello", repository.findAll().get(0).getName());

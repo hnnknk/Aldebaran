@@ -24,14 +24,14 @@ public class ModelRepositoryImpl implements ModelRepository {
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public final List<Model> findAll() {
+    public List<Model> findAll() {
         String sql = "SELECT MODEL_ID, MODEL_NAME FROM MODEL";
         RowMapper<Model> rowMapper = new ModelMapper();
         return this.jdbcTemplate.query(sql, rowMapper);
     }
 
     @Override
-    public final void add(final Model model) {
+    public void add(final Model model) {
         String sql = "INSERT INTO MODEL (MODEL_NAME) values (?)";
         jdbcTemplate.update(sql, model.getName());
     }

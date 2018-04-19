@@ -38,7 +38,7 @@ angular.module('myApp').controller('ModelController', ['$scope', 'ModelService',
 
     function reset(){
         self.model = {id:null, name:''};
-        $scope.myForm.$setPristine();
+        $scope.form.$setPristine();
     }
 
 }]);

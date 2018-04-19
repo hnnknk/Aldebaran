@@ -26,7 +26,8 @@ public class ModelRepositoryImpl implements ModelRepository{
 
     @Override
     public void add(Model model) {
-        String sql = "INSERT INTO MODEL (MODEL_ID, MODEL_NAME) values (?, ?)";
-        jdbcTemplate.update(sql, model.getId(), model.getName());
+        String sql = "INSERT INTO MODEL (MODEL_NAME) values (?)";
+        jdbcTemplate.update(sql, model.getName());
     }
+
 }

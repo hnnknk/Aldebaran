@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Aldebaran</title>
     <script src="webjars/angularjs/1.6.9/angular.min.js"></script>
     <link rel="stylesheet" href="webjars/bootstrap/4.0.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/app.css">
@@ -10,47 +10,53 @@
 </head>
 <body ng-app="myApp" ng-controller="ModelController as ctrl" class="ng-cloak">
 
-<form ng-submit="ctrl.submit()" class="form-horizontal" name="form">
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <form ng-submit="ctrl.submit()" class="form-horizontal" name="form">
 
-    <div class="form-group row">
-        <label for="inputId" class="col-sm-2 col-form-label">Номер:</label>
-        <div class="col-sm-10 input-group">
-            <input type="text" ng-model="ctrl.model.id" class="form-control" id="inputId" placeholder="Введите идентификационный номер" required/>
+                <div class="form-group row">
+                    <label for="inputName" class="col-sm-2 col-form-label">Имя:</label>
+                    <div class="col-sm-10">
+                        <input type="text" ng-model="ctrl.model.name" class="form-control" id="inputName" placeholder="Введите название" required ng-maxlength="50"/>
+                    </div>
+                </div>
+
+                <div class="form-actions float-right">
+                    <input type="submit"  value="Создать" class="btn btn-primary btn-sm" ng-disabled="form.$invalid">
+                </div>
+            </form>
         </div>
-    </div>
 
-    <div class="form-group row">
-        <label for="inputName" class="col-sm-2 col-form-label">Имя:</label>
-        <div class="col-sm-10">
-            <input type="text" ng-model="ctrl.model.name"class="form-control" id="inputName" placeholder="Введите название" required/>
+        <div class="col-md-7">
+
+            <div class="row search">
+                <div class="col-md-5 offset-7">
+                    <input type="text" class="form-control" placeholder="Поиск" ng-model="search.name"/>
+                </div>
+            </div>
+
+
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Номер</th>
+                        <th>Имя</th>
+                    </tr>
+                </thead>
+                <tbody class="body-space">
+                    <tr ng-repeat="m in ctrl.models | filter:search ">
+                        <td><span ng-bind="m.id"></span></td>
+                        <td><span ng-bind="m.name"></span></td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
-    </div>
-
-    <div class="form-actions float-right">
-        <input type="submit"  value="Создать" class="btn btn-primary btn-sm" ng-disabled="form.$invalid">
-    </div>
-</form>
-
-<div class="panel panel-default">
-    <!-- Default panel contents -->
-    <div class="panel-heading"><span class="lead">Список</span></div>
-    <div class="tablecontainer">
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="m in ctrl.models">
-                <td><span ng-bind="m.id"></span></td>
-                <td><span ng-bind="m.name"></span></td>
-            </tr>
-            </tbody>
-        </table>
     </div>
 </div>
+
+
+
 <script src="/js/model_controller.js"></script>
 <script src="/js/model_service.js"></script>
 </body>
